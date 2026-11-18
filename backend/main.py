@@ -43,6 +43,7 @@ class ChannelModel(Base):
     view_count = Column(String)  # Mapped from viewCount
     created = Column(String)
     saved_at = Column(String)    # Mapped from savedAt
+    lang = Column(String, nullable=True)  # Content language (pt, en, de...)
     
     history = relationship("HistoryModel", back_populates="channel", cascade="all, delete-orphan")
 
@@ -60,6 +61,15 @@ class HistoryModel(Base):
 
 # Create Tables
 Base.metadata.create_all(bind=engine)
+
+# Simple migration: add lang column if missing (existing databases)
+with engine.connect() as conn:
+    try:
+        conn.execute(__import__('sqlalchemy').text("ALTER TABLE channels ADD COLUMN lang VARCHAR"))
+        conn.commit()
+        print("Added 'lang' column to channels table")
+    except Exception:
+        pass  # Column already exists
 
 # --- Pydantic Schemas (API) ---
 class ChannelHistory(BaseModel):
@@ -81,6 +91,7 @@ class Channel(BaseModel):
     viewCount: str
     created: str
     savedAt: Optional[str] = None
+    lang: Optional[str] = None
     history: List[ChannelHistory] = []
 
     class Config:
@@ -130,6 +141,7 @@ def get_channels(db: Session = Depends(get_db)):
             viewCount=c.view_count,
             created=c.created,
             savedAt=c.saved_at,
+            lang=c.lang,
             history=history_list
         ))
     return results
@@ -146,6 +158,8 @@ def save_channel(channel: Channel, db: Session = Depends(get_db)):
         existing_channel.subs = channel.subs
         existing_channel.video_count = channel.videoCount
         existing_channel.view_count = channel.viewCount
+        if channel.lang:
+            existing_channel.lang = channel.lang
         # Add history
         new_history = HistoryModel(
             channel_id=channel.id,
@@ -186,7 +200,8 @@ def save_channel(channel: Channel, db: Session = Depends(get_db)):
             video_count=channel.videoCount,
             view_count=channel.viewCount,
             created=channel.created,
-            saved_at=saved_at
+            saved_at=saved_at,
+            lang=channel.lang
         )
         db.add(new_channel)
         db.commit() # Commit to get the ID ready for foreign key if needed (though we set ID manually)
@@ -210,10 +225,20 @@ def delete_channel(channel_id: str, db: Session = Depends(get_db)):
     channel = db.query(ChannelModel).filter(ChannelModel.id == channel_id).first()
     if not channel:
         raise HTTPException(status_code=404, detail="Channel not found")
-    
+
     db.delete(channel)
     db.commit()
     return {"message": "Channel deleted"}
+
+@app.patch("/channels/{channel_id}")
+def update_channel_lang(channel_id: str, lang: str, db: Session = Depends(get_db)):
+    channel = db.query(ChannelModel).filter(ChannelModel.id == channel_id).first()
+    if not channel:
+        raise HTTPException(status_code=404, detail="Channel not found")
+
+    channel.lang = lang
+    db.commit()
+    return {"message": "Language updated", "id": channel_id, "lang": lang}
 
 # CORS setup
 from fastapi.middleware.cors import CORSMiddleware

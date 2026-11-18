@@ -6,132 +6,228 @@
 const CATEGORY_SEEDS = {
     'Finanças Pessoais': {
         pt: ['finanças pessoais', 'como economizar dinheiro', 'orçamento familiar', 'vida financeira'],
-        en: ['personal finance', 'how to save money', 'budgeting tips', 'money habits']
+        en: ['personal finance', 'how to save money', 'budgeting tips', 'money habits'],
+        de: ['private finanzen tipps', 'geld sparen', 'haushaltsbudget', 'finanzen erklärt'],
+        it: ['finanze personali', 'come risparmiare', 'budget familiare', 'finanze spiegato'],
+        es: ['finanzas personales', 'cómo ahorrar dinero', 'presupuesto familiar', 'finanzas explicadas']
     },
     'Investimentos': {
         pt: ['investimentos para iniciantes', 'renda fixa', 'bolsa de valores explicado', 'carteira de investimentos'],
-        en: ['investing for beginners', 'stock market explained', 'index funds', 'investment portfolio']
+        en: ['investing for beginners', 'stock market explained', 'index funds', 'investment portfolio'],
+        de: ['investieren für anfänger', 'börse erklärt', 'aktien für einsteiger', 'depot aufbauen'],
+        it: ['investire per principianti', 'borsa spiegata', 'azioni per principianti', 'portafoglio investimenti'],
+        es: ['invertir para principiantes', 'bolsa explicada', 'acciones para principiantes', 'cartera de inversión']
     },
     'Negócios e Empreendedorismo': {
         pt: ['empreendedorismo', 'como abrir um negócio', 'modelo de negócio', 'negócios lucrativos'],
-        en: ['entrepreneurship', 'how to start a business', 'business model', 'profitable business ideas']
+        en: ['entrepreneurship', 'how to start a business', 'business model', 'profitable business ideas'],
+        de: ['gründung', 'geschäftsidee', 'business model', 'selbstständig machen'],
+        it: ['imprenditoria', 'aprire un business', 'modello di business', 'startups'],
+        es: ['emprendimiento', 'cómo montar un negocio', 'modelo de negocio', 'negocios rentables']
     },
     'Carreira e Profissões': {
         pt: ['carreira profissional', 'dicas de currículo', 'entrevista de emprego', 'soft skills'],
-        en: ['career advice', 'resume tips', 'job interview', 'soft skills workplace']
+        en: ['career advice', 'resume tips', 'job interview', 'soft skills workplace'],
+        de: ['berufskarriere', 'lebenslauf tipps', 'vorstellungsgespräch', 'soft skills'],
+        it: ['carriera', 'consigli curriculum', 'colloquio di lavoro', 'competenze trasversali'],
+        es: ['carrera profesional', 'consejos curriculum', 'entrevista de trabajo', 'habilidades blandas']
     },
     'Inteligência Artificial': {
         pt: ['inteligência artificial explicada', 'IA no dia a dia', 'machine learning explicado', 'notícias de IA'],
-        en: ['artificial intelligence explained', 'AI tools', 'machine learning explained', 'AI news']
+        en: ['artificial intelligence explained', 'AI tools', 'machine learning explained', 'AI news'],
+        de: ['künstliche intelligenz erklärt', 'ki tools', 'maschinelles lernen', 'ki news'],
+        it: ['intelligenza artificiale spiegata', 'strumenti ia', 'machine learning spiegato', 'notizie ia'],
+        es: ['inteligencia artificial explicada', 'herramientas ia', 'machine learning explicado', 'noticias ia']
     },
     'Softwares e Ferramentas': {
         pt: ['melhores ferramentas', 'tutorial de software', 'apps que fazem diferença', 'automação de tarefas'],
-        en: ['best software tools', 'software tutorial', 'must have apps', 'task automation']
+        en: ['best software tools', 'software tutorial', 'must have apps', 'task automation'],
+        de: ['beste software tools', 'software tutorial', 'apps die helfen', 'automatisierung'],
+        it: ['migliori software', 'tutorial software', 'app utili', 'automazione'],
+        es: ['mejores herramientas software', 'tutorial de software', 'apps útiles', 'automatización de tareas']
     },
     'Cibersegurança': {
         pt: ['cibersegurança explicada', 'como se proteger online', 'golpes digitais', 'privacidade digital'],
-        en: ['cybersecurity explained', 'online safety tips', 'scams explained', 'digital privacy']
+        en: ['cybersecurity explained', 'online safety tips', 'scams explained', 'digital privacy'],
+        de: ['it security erklärt', 'online schutz', 'betrug im internet', 'datenschutz'],
+        it: ['cybersecurity spiegata', 'protezione online', 'truffe online', 'privacy digitale'],
+        es: ['ciberseguridad explicada', 'protección online', 'estafas digitales', 'privacidad digital']
     },
     'Ciência e Tecnologia': {
         pt: ['ciência explicada', 'tecnologia do futuro', 'curiosidades científicas', 'invenções incríveis'],
-        en: ['science explained', 'future technology', 'science facts', 'amazing inventions']
+        en: ['science explained', 'future technology', 'science facts', 'amazing inventions'],
+        de: ['wissenschaft erklärt', 'technologie der zukunft', 'wissenschaft fakten', 'erfindungen'],
+        it: ['scienza spiegata', 'tecnologia del futuro', 'curiosità scientifiche', 'invenzioni incredibili'],
+        es: ['ciencia explicada', 'tecnología del futuro', 'curiosidades científicas', 'invenciones increíbles']
     },
     'História e Documentários': {
         pt: ['história explicada', 'documentário curto', 'curiosidades históricas', 'impérios antigos'],
-        en: ['history explained', 'short documentary', 'history facts', 'ancient empires']
+        en: ['history explained', 'short documentary', 'history facts', 'ancient empires'],
+        de: ['geschichte erklärt', 'kurzdoku', 'historische fakten', 'alte reiche'],
+        it: ['storia spiegata', 'documentario breve', 'curiosità storiche', 'imperi antichi'],
+        es: ['historia explicada', 'documental corto', 'curiosidades históricas', 'imperios antiguos']
     },
     'Crimes e Mistérios': {
         pt: ['casos reais resolvidos', 'crimes misteriosos', 'mistérios não resolvidos', 'true crime'],
-        en: ['true crime cases', 'unsolved mysteries', 'cold cases', 'disappearances explained']
+        en: ['true crime cases', 'unsolved mysteries', 'cold cases', 'disappearances explained'],
+        de: ['wahre criminality', 'ungelöste fälle', 'verbrechen mysteriös', 'true crime deutsch'],
+        it: ['casi criminali veri', 'misteri irrisolti', 'delitti misteriosi', 'true crime italia'],
+        es: ['casos criminales reales', 'misterios sin resolver', 'crímenes misteriosos', 'true crime español']
     },
     'Psicologia e Comportamento': {
         pt: ['psicologia explicada', 'manipulação e persuasão', 'inteligência emocional', 'comportamento humano'],
-        en: ['psychology explained', 'persuasion techniques', 'emotional intelligence', 'human behavior']
+        en: ['psychology explained', 'persuasion techniques', 'emotional intelligence', 'human behavior'],
+        de: ['psychologie erklärt', 'manipulation techniken', 'emotionale intelligenz', 'menschliches verhalten'],
+        it: ['psicologia spiegata', 'tecniche di manipolazione', 'intelligenza emotiva', 'comportamento umano'],
+        es: ['psicología explicada', 'técnicas de manipulación', 'inteligencia emocional', 'comportamiento humano']
     },
     'Produtividade e Hábitos': {
         pt: ['produtividade', 'como criar hábitos', 'gestão do tempo', 'foco e disciplina'],
-        en: ['productivity tips', 'how to build habits', 'time management', 'focus and discipline']
+        en: ['productivity tips', 'how to build habits', 'time management', 'focus and discipline'],
+        de: ['produktivität tipps', 'gewohnheiten aufbauen', 'zeitmanagement', 'fokus und disziplin'],
+        it: ['produttività', 'creare abitudini', 'gestione del tempo', 'concentrazione e disciplina'],
+        es: ['productividad', 'crear hábitos', 'gestión del tiempo', 'enfoque y disciplina']
     },
     'Saúde e Longevidade': {
         pt: ['saúde e bem-estar', 'longevidade', 'dicas de saúde', 'sono e descanso'],
-        en: ['health and wellness', 'longevity', 'health tips', 'sleep science']
+        en: ['health and wellness', 'longevity', 'health tips', 'sleep science'],
+        de: ['gesundheit und wellness', 'längeres leben', 'gesundheitstipps', 'schlaf wissenschaft'],
+        it: ['salute e benessere', 'longevità', 'consigli di salute', 'scienza del sonno'],
+        es: ['salud y bienestar', 'longevidad', 'consejos de salud', 'ciencia del sueño']
     },
     'Casa e Organização': {
         pt: ['organização da casa', 'clean home', 'declutter', 'arrumação da casa'],
-        en: ['home organization', 'clean home', 'declutter your life', 'home decluttering']
+        en: ['home organization', 'clean home', 'declutter your life', 'home decluttering'],
+        de: ['haus organisation', 'aufräumen', 'declutter', 'wohnung ordnen'],
+        it: ['organizzazione casa', 'declutter', 'pulizia e ordine', 'casa ordinata'],
+        es: ['organización del hogar', 'limpieza y orden', 'declutter', 'hogar organizado']
     },
     'Carros e Mobilidade': {
         pt: ['curiosidades sobre carros', 'indústria automotiva', 'carros elétricos', 'história dos carros'],
-        en: ['car facts', 'automotive industry', 'electric vehicles', 'history of cars']
+        en: ['car facts', 'automotive industry', 'electric vehicles', 'history of cars'],
+        de: ['auto fakten', 'autoindustrie', 'elektroautos', 'auto geschichte'],
+        it: ['auto curiose', 'industria automobilistica', 'auto elettriche', 'storia delle auto'],
+        es: ['datos de coches', 'industria automotriz', 'coches eléctricos', 'historia de los coches']
     },
     'Viagens e Vida no Exterior': {
         pt: ['viver no exterior', 'custo de vida', 'melhores cidades para morar', 'imigração'],
-        en: ['living abroad', 'cost of living', 'best cities to live', 'moving to another country']
+        en: ['living abroad', 'cost of living', 'best cities to live', 'moving to another country'],
+        de: ['im ausland leben', 'lebenshaltungskosten', 'beste städte', 'auswandern'],
+        it: ['vivere all estero', 'costo della vita', 'migliori città', 'trasferirsi'],
+        es: ['vivir en el extranjero', 'costo de vida', 'mejores ciudades para vivir', 'emigrar']
     },
     'Pets e Animais': {
         pt: ['curiosidades sobre animais', 'cuidados com pets', 'comportamento animal', 'raças de cães'],
-        en: ['animal facts', 'pet care tips', 'animal behavior', 'dog breeds explained']
+        en: ['animal facts', 'pet care tips', 'animal behavior', 'dog breeds explained'],
+        de: ['tier fakten', 'haustier pflege', 'tierverhalten', 'hunderassen'],
+        it: ['curiosità animali', 'cura degli animali', 'comportamento animale', 'razze cani'],
+        es: ['datos de animales', 'cuidado de mascotas', 'comportamiento animal', 'razas de perros']
     },
     'Sustentabilidade e Futuro': {
         pt: ['sustentabilidade', 'energia limpa', 'clima e ambiente', 'futuro do planeta'],
-        en: ['sustainability', 'clean energy', 'climate change explained', 'future of the planet']
+        en: ['sustainability', 'clean energy', 'climate change explained', 'future of the planet'],
+        de: ['nachhaltigkeit', 'saubere energie', 'klimawandel erklärt', 'zukunft des planeten'],
+        it: ['sostenibilità', 'energia pulita', 'cambiamento climatico spiegato', 'futuro del pianeta'],
+        es: ['sostenibilidad', 'energía limpia', 'cambio climático explicado', 'futuro del planeta']
     },
     'Livros e Filosofia': {
         pt: ['resumo de livros', 'filosofia explicada', 'grandes pensadores', 'estoicismo'],
-        en: ['book summary', 'philosophy explained', 'great thinkers', 'stoicism']
+        en: ['book summary', 'philosophy explained', 'great thinkers', 'stoicism'],
+        de: ['buchzusammenfassung', 'philosophie erklärt', 'große denker', 'stoizismus'],
+        it: ['riassunto libri', 'filosofia spiegata', 'grandi pensatori', 'stoicismo'],
+        es: ['resumen de libros', 'filosofía explicada', 'grandes pensadores', 'estoicismo']
     },
     'Religião e Mitologia': {
         pt: ['mitologia explicada', 'religiões do mundo', 'mitos e lendas', 'histórias bíblicas'],
-        en: ['mythology explained', 'world religions', 'myths and legends', 'bible stories']
+        en: ['mythology explained', 'world religions', 'myths and legends', 'bible stories'],
+        de: ['mythologie erklärt', 'religionen der welt', 'mythen und sagen', 'bibelgeschichten'],
+        it: ['mitologia spiegata', 'religioni del mondo', 'miti e leggende', 'storie bibliche'],
+        es: ['mitología explicada', 'religiones del mundo', 'mitos y leyendas', 'historias bíblicas']
     },
     'Cultura Pop e Nostalgia': {
         pt: ['cultura pop', 'nostalgia anos 90', 'história do cinema', 'curiosidades de filmes'],
-        en: ['pop culture', '90s nostalgia', 'history of cinema', 'movie facts']
+        en: ['pop culture', '90s nostalgia', 'history of cinema', 'movie facts'],
+        de: ['popkultur', '90er jahre nostalgia', 'filmgeschichte', 'film fakten'],
+        it: ['cultura pop', 'nostalgia anni 90', 'storia del cinema', 'curiosità sui film'],
+        es: ['cultura pop', 'nostalgia años 90', 'historia del cine', 'curiosidades de películas']
     },
     'Games e Indústria Gamer': {
         pt: ['indústria dos games', 'história dos videogames', 'curiosidades de games', 'game dev'],
-        en: ['gaming industry', 'history of video games', 'gaming facts', 'game development']
+        en: ['gaming industry', 'history of video games', 'gaming facts', 'game development'],
+        de: ['games industrie', 'videospiele geschichte', 'gaming fakten', 'game dev deutsch'],
+        it: ['industria videoludica', 'storia dei videogiochi', 'curiosità gaming', 'game dev'],
+        es: ['industria de videojuegos', 'historia de los videojuegos', 'curiosidades gaming', 'desarrollo de videojuegos']
     },
     'Beleza e Cuidados Pessoais': {
         pt: ['skincare', 'cuidados com a pele', 'rotina de beleza', 'auto-cuidado'],
-        en: ['skincare routine', 'skincare explained', 'self care routine', 'beauty tips']
+        en: ['skincare routine', 'skincare explained', 'self care routine', 'beauty tips'],
+        de: ['hautpflege routine', 'hautpflege erklärt', 'selbstfürsorge', 'beauty tipps'],
+        it: ['skincare routine', 'cura della pelle', 'autocura', 'consigli bellezza'],
+        es: ['cuidado de la piel', 'rutina de belleza', 'autocuidado', 'consejos de belleza']
     },
     'Moda e Luxo': {
         pt: ['história da moda', 'marcas de luxo', 'tendências de moda', 'estilo pessoal'],
-        en: ['history of fashion', 'luxury brands', 'fashion trends', 'personal style']
+        en: ['history of fashion', 'luxury brands', 'fashion trends', 'personal style'],
+        de: ['modengeschichte', 'luxusmarken', 'modetrends', 'persönlicher stil'],
+        it: ['storia della moda', 'marchi di lusso', 'tendenze moda', 'stile personale'],
+        es: ['historia de la moda', 'marcas de lujo', 'tendencias de moda', 'estilo personal']
     },
     'Educação e Conhecimentos Gerais': {
         pt: ['conhecimentos gerais', 'você sabia', 'curiosidades do mundo', 'aprenda algo novo'],
-        en: ['general knowledge', 'did you know facts', 'world facts', 'learn something new']
+        en: ['general knowledge', 'did you know facts', 'world facts', 'learn something new'],
+        de: ['allgemeinwissen', 'wusstest du', 'welterkenntnisse', 'etwas neues lernen'],
+        it: ['conoscenze generali', 'lo sapevi che', 'curiosità sul mondo', 'imparare qualcosa di nuovo'],
+        es: ['cultura general', 'sabías que', 'datos curiosos del mundo', 'aprender algo nuevo']
     },
     // --- Original general categories (kept) ---
     'Gaming': {
         pt: ['gameplay highlights', 'análise de jogos indie', 'dicas de jogos'],
-        en: ['gameplay highlights', 'indie game review', 'gaming tips tricks']
+        en: ['gameplay highlights', 'indie game review', 'gaming tips tricks'],
+        de: ['gameplay highlights', 'indie spiele review', 'gaming tipps'],
+        it: ['gameplay highlights', 'recensioni giochi indie', 'consigli gaming'],
+        es: ['gameplay highlights', 'análisis de juegos indie', 'consejos de gaming']
     },
     'Fitness e Treino': {
         pt: ['treino em casa', 'motivação fitness', 'hipertrofia'],
-        en: ['home workout routine', 'fitness motivation', 'strength training']
+        en: ['home workout routine', 'fitness motivation', 'strength training'],
+        de: ['heimtraining', 'fitness motivation', 'krafttraining'],
+        it: ['allenamento a casa', 'motivazione fitness', 'allenamento forza'],
+        es: ['entrenamiento en casa', 'motivación fitness', 'entrenamiento de fuerza']
     },
     'Culinária': {
         pt: ['receitas fáceis', 'tutorial de cozinha', 'comida de rua'],
-        en: ['easy recipes', 'cooking tutorial', 'street food tour']
+        en: ['easy recipes', 'cooking tutorial', 'street food tour'],
+        de: ['einfache rezepte', 'kochtutorial', 'street food'],
+        it: ['ricette facili', 'tutorial cucina', 'street food'],
+        es: ['recetas fáciles', 'tutorial de cocina', 'street food']
     },
     'Vlogs e Estilo de Vida': {
         pt: ['vlog diário', 'vida minimalista', 'rotina de produtividade'],
-        en: ['daily vlog life', 'minimalist lifestyle', 'productivity routine']
+        en: ['daily vlog life', 'minimalist lifestyle', 'productivity routine'],
+        de: ['tagesvlog', 'minimalismus leben', 'produktivität routine'],
+        it: ['vlog quotidiano', 'vita minimalista', 'routine produttività'],
+        es: ['vlog diario', 'vida minimalista', 'rutina de productividad']
     },
     'Beleza': {
         pt: ['tutorial de maquiagem', 'rotina de skincare', 'haul de moda'],
-        en: ['makeup tutorial', 'skincare routine', 'fashion haul']
+        en: ['makeup tutorial', 'skincare routine', 'fashion haul'],
+        de: ['makeup tutorial', 'haarpflege routine', 'mode haul'],
+        it: ['tutorial trucco', 'skincare routine', 'haul moda'],
+        es: ['tutorial de maquillaje', 'rutina de skincare', 'haul de moda']
     },
     'Viagens': {
         pt: ['vlog de viagem', 'destinos escondidos', 'viagem econômica'],
-        en: ['travel vlog', 'hidden travel destinations', 'budget travel tips']
+        en: ['travel vlog', 'hidden travel destinations', 'budget travel tips'],
+        de: ['reisefilme', 'versteckte reiseziele', 'günstig reisen'],
+        it: ['vlog di viaggio', 'mete nascoste', 'viaggi economici'],
+        es: ['vlog de viaje', 'destinos escondidos', 'viajar barato']
     },
     'Música': {
         pt: ['novos artistas', 'covers de músicas', 'produção musical'],
-        en: ['new music artist', 'cover songs', 'music production tips']
+        en: ['new music artist', 'cover songs', 'music production tips'],
+        de: ['neue Künstler', 'cover songs', 'musikproduktion'],
+        it: ['nuovi artisti', 'cover', 'produzione musicale'],
+        es: ['nuevos artistas', 'covers', 'producción musical']
     }
 };
 
@@ -165,6 +261,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const n = selectedCategories.size;
         counterLabel.textContent = n === 0 ? 'nenhuma selecionada' : `${n} selecionada${n > 1 ? 's' : ''}`;
         counterLabel.style.color = n > 0 ? 'var(--accent-color)' : 'var(--text-secondary)';
+        updateQuotaEstimate();
+    }
+
+    function updateQuotaEstimate() {
+        const el = document.getElementById('quotaEstimate');
+        if (!el) return;
+        const seedsEl = document.getElementById('fSeeds');
+        const seedsPer = seedsEl ? (parseInt(seedsEl.value, 10) || 1) : 1;
+        const n = selectedCategories.size;
+        const trending = document.getElementById('useTrending');
+        const cost = n * seedsPer * 100 + (trending && trending.checked ? 1 : 0);
+        const bar = Math.min(100, (cost / 10000) * 100);
+        el.innerHTML = n === 0 && !(trending && trending.checked)
+            ? ''
+            : `Custo estimado desta execução: <strong style="color:${cost > 9000 ? '#ff4d4d' : cost > 5000 ? '#ffcc00' : '#00cc66'}">${cost}</strong> / 10.000 unidades de quota diária
+              <div style="background:#333;border-radius:8px;height:6px;margin-top:6px;overflow:hidden;">
+                <div style="background:${cost > 9000 ? '#ff4d4d' : cost > 5000 ? '#ffcc00' : '#00cc66'};height:100%;width:${bar}%;"></div>
+              </div>`;
     }
 
     function setChip(name, on) {
@@ -189,6 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearBtn = document.getElementById('clearCategories');
     if (selectAllBtn) selectAllBtn.addEventListener('click', () => {
         Object.keys(CATEGORY_SEEDS).forEach(name => setChip(name, true));
+        updateQuotaEstimate();
     });
     if (clearBtn) clearBtn.addEventListener('click', () => {
         Object.keys(CATEGORY_SEEDS).forEach(name => setChip(name, false));
@@ -261,6 +376,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     discoverBtn.addEventListener('click', runDiscovery);
 
+    // Quota estimate reacts to seeds count and trending checkbox
+    const seedsInput = document.getElementById('fSeeds');
+    if (seedsInput) seedsInput.addEventListener('input', updateQuotaEstimate);
+    if (useTrending) useTrending.addEventListener('change', updateQuotaEstimate);
+
     // Language selector
     const langSelect = document.getElementById('discoverLang');
     if (langSelect) {
@@ -295,24 +415,37 @@ document.addEventListener('DOMContentLoaded', () => {
         discoverContainer.innerHTML = '<div class="empty-state"><p>Escaneando o YouTube em busca de canais que atendem aos seus critérios...</p></div>';
 
         const found = new Map(); // channelId -> { channel, category, score }
-        let cacheHits = 0, cacheMisses = 0;
+        cacheHits = 0; cacheMisses = 0;
 
         try {
             // 1. Category seed searches (seeds in the selected language).
-            // Seeds are shuffled per run so results vary between executions.
-            // Results are cached in localStorage for 24h to save quota.
+            // Cached seeds are used FIRST (free), only uncached ones hit the API.
+            // On 429 (quota exceeded) we skip to the next seed instead of aborting.
+            const seedsPerRun = parseInt(document.getElementById('fSeeds').value, 10) || 1;
+            let quotaExhausted = false;
             const shuffled = arr => [...arr].sort(() => Math.random() - 0.5);
             for (const category of selectedCategories) {
                 const cat = CATEGORY_SEEDS[category];
-                const seeds = shuffled(cat[DISCOVER_LANG]).slice(0, 2); // limit quota usage
+                const seedCached = s => !!cacheGet('search', s + '|' + DISCOVER_LANG);
+                const seeds = shuffled(cat[DISCOVER_LANG])
+                    .sort((a, b) => seedCached(b) - seedCached(a)) // cached first
+                    .slice(0, seedsPerRun);
                 for (const seed of seeds) {
                     let items = cacheGet('search', seed + '|' + DISCOVER_LANG);
                     if (items) {
                         cacheHits++;
                     } else {
-                        cacheMisses++;
-                        items = await ytSearchChannels(apiKey, seed);
-                        cacheSet('search', seed + '|' + DISCOVER_LANG, items);
+                        try {
+                            cacheMisses++;
+                            items = await ytSearchChannels(apiKey, seed);
+                            cacheSet('search', seed + '|' + DISCOVER_LANG, items);
+                        } catch (err) {
+                            if (err.message && err.message.includes('[429]')) {
+                                quotaExhausted = true;
+                                continue; // skip this seed, keep going with the rest
+                            }
+                            throw err;
+                        }
                     }
                     for (const item of items) {
                         if (!found.has(item.id.channelId)) {
@@ -377,6 +510,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderGrouped(results);
 
+            if (quotaExhausted) {
+                showCacheNote('⚠️ Quota do dia esgotada em alguns seeds — resultados parciais mostrados com o cache disponível. Tente outra chave ou aguarde o reset diário.');
+            }
             if (cacheMisses === 0) {
                 showCacheNote('⚡ 100% dos dados vieram do cache local — nenhuma unidade de quota consumida.');
             } else {
@@ -396,6 +532,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // localStorage cache for API responses (saves quota)
     // TTL default 24h (86400s). Keys are namespaced: yt_cache:type:langOrRegion:id
+    // Cache counters shared across the discovery pipeline (incl. ytChannelStatsCached)
+    let cacheHits = 0, cacheMisses = 0;
+
     function cacheSet(type, key, data, ttlSeconds) {
         try {
             const entry = { t: Date.now(), ttl: (ttlSeconds || 86400) * 1000, d: data };
@@ -437,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function ytSearchChannels(apiKey, query) {
-        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${encodeURIComponent(query)}&relevanceLanguage=${DISCOVER_LANG}&maxResults=25&key=${apiKey}`;
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${encodeURIComponent(query)}&relevanceLanguage=${DISCOVER_LANG}&maxResults=50&key=${apiKey}`;
         const data = await ytFetch(url);
         return data.items || [];
     }
@@ -601,10 +740,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const card = document.createElement('div');
         card.className = 'channel-card';
         const fmt = n => new Intl.NumberFormat('en-US', { notation: 'compact' }).format(n);
+        const LANG_FLAGS = { pt: '🇧🇷', en: '🇺🇸', de: '🇩🇪', it: '🇮🇹', es: '🇪🇸' };
+        const flag = LANG_FLAGS[DISCOVER_LANG] || '❓';
         card.innerHTML = `
             <div class="score-badge" style="background-color: ${scoreColor(c.score)}">${c.score}</div>
             <img src="${c.thumb}" alt="${c.title}" class="channel-thumbnail" referrerpolicy="no-referrer">
-            <h3 class="channel-title">${c.title}</h3>
+            <h3 class="channel-title">${c.title} <span title="Idioma do conteúdo: ${DISCOVER_LANG.toUpperCase()}" style="font-size: 1.1em; margin-left: 4px;">${flag}</span></h3>
             <div class="channel-stats">
                 <span>${fmt(c.subs)} inscritos</span>
                 <span>•</span>
@@ -628,7 +769,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({
                         id: c.id, title: c.title, description: c.description,
                         thumb: c.thumb, subs: String(c.subs), videoCount: String(c.videoCount),
-                        viewCount: String(c.viewCount), created: c.created
+                        viewCount: String(c.viewCount), created: c.created,
+                        lang: DISCOVER_LANG
                     })
                 });
                 if (res.ok) {

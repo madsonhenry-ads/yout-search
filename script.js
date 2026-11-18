@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Expose saveChannel to global scope so inline onclick works
     window.saveChannel = async function (id, title, thumb, subs, videoCount, created, viewCount, description) {
+        const langSelect = document.getElementById('searchLang');
         const channelData = {
             id,
             title,
@@ -227,7 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
             videoCount,
             created,
             viewCount: viewCount || '0',
-            description: description || ''
+            description: description || '',
+            lang: langSelect ? langSelect.value : null
         };
 
         try {

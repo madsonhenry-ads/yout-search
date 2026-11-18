@@ -2,11 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedContainer = document.getElementById('savedContainer');
     const statTotalChannels = document.getElementById('statTotalChannels');
     const statHighPotential = document.getElementById('statHighPotential');
+    const sortOrderSelect = document.getElementById('sortOrder');
+    const langFilterSelect = document.getElementById('langFilter');
+
+    // Flags by language code
+    const LANG_FLAGS = {
+        pt: '🇧🇷', en: '🇺🇸', de: '🇩🇪', it: '🇮🇹', es: '🇪🇸'
+    };
+
+    let savedChannels = [];
 
     // Make loadDashboard available globally
     window.loadDashboard = loadDashboard;
 
-    // loadDashboard(); // Remove auto-load
+    if (sortOrderSelect) sortOrderSelect.addEventListener('change', renderSavedChannels);
+    if (langFilterSelect) langFilterSelect.addEventListener('change', renderSavedChannels);
 
     async function loadDashboard() {
         try {
@@ -14,16 +24,57 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error('Failed to load channels');
             }
-            const savedChannels = await response.json();
+            savedChannels = await response.json();
+            renderSavedChannels();
 
-            statTotalChannels.textContent = savedChannels.length;
-            savedContainer.innerHTML = '';
+        } catch (error) {
+            console.error('Error loading dashboard:', error);
+            savedContainer.innerHTML = '<div class="empty-state"><p style="color:red">Failed to load data. Is Docker running?</p></div>';
+        }
+    }
 
-            let highPotentialCount = 0;
+    function renderSavedChannels() {
+        if (!savedChannels) savedChannels = [];
 
-            savedChannels.forEach(channel => {
+        // Stats over the full list
+        statTotalChannels.textContent = savedChannels.length;
+        let highPotentialCount = 0;
+        savedChannels.forEach(ch => {
+            if (calculateScore(ch) >= 90) highPotentialCount++;
+        });
+        statHighPotential.textContent = highPotentialCount;
+
+        // Apply language filter
+        const langFilter = langFilterSelect ? langFilterSelect.value : '';
+        let channels = savedChannels;
+        if (langFilter) {
+            if (langFilter === 'unknown') {
+                channels = channels.filter(ch => !ch.lang || !LANG_FLAGS[ch.lang]);
+            } else {
+                channels = channels.filter(ch => ch.lang === langFilter);
+            }
+        }
+
+        // Sort
+        const sortOrder = sortOrderSelect ? sortOrderSelect.value : 'scoreDesc';
+        channels = [...channels];
+        if (sortOrder === 'scoreAsc') {
+            channels.sort((a, b) => calculateScore(a) - calculateScore(b));
+        } else {
+            channels.sort((a, b) => calculateScore(b) - calculateScore(a));
+        }
+
+        savedContainer.innerHTML = '';
+
+        if (channels.length === 0) {
+            savedContainer.innerHTML = '<div class="empty-state"><p>No channels match the current filters.</p></div>';
+            return;
+        }
+
+            channels.forEach(channel => {
                 const score = calculateScore(channel);
-                if (score >= 90) highPotentialCount++;
+                const flag = (channel.lang && LANG_FLAGS[channel.lang]) ? LANG_FLAGS[channel.lang] : '❓';
+                const langName = channel.lang ? (LANG_FLAGS[channel.lang] ? channel.lang.toUpperCase() : channel.lang) : '';
 
                 const card = document.createElement('div');
                 card.className = 'channel-card';
@@ -50,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.innerHTML = `
                     <div class="score-badge" style="background-color: ${scoreColor}">${score}</div>
                     <img src="${channel.thumb}" alt="${channel.title}" class="channel-thumbnail" referrerpolicy="no-referrer">
-                    <h3 class="channel-title">${channel.title}</h3>
+                    <h3 class="channel-title">${channel.title} <span title="Idioma do conteúdo${langName ? ': ' + langName : ' não identificado'}" style="font-size: 1.1em; margin-left: 4px;">${flag}</span></h3>
                     
                     <div class="channel-stats">
                         <span>${subCount !== 'Hidden' ? subCount + ' Subs' : 'Subs Hidden'}</span>
@@ -77,82 +128,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 savedContainer.appendChild(card);
             });
-
-            statHighPotential.textContent = highPotentialCount;
-
-            if (savedChannels.length === 0) {
-                savedContainer.innerHTML = '<div class="empty-state"><p>No channels saved yet. Go to Search to find some!</p></div>';
-            }
-        } catch (error) {
-            console.error('Error loading dashboard:', error);
-            savedContainer.innerHTML = '<div class="empty-state"><p style="color:red">Failed to load data. Is Docker running?</p></div>';
-        }
     }
 
-    // SCORING SYSTEM Implementation based on gemini.md
+    // Same scoring formula as discover.js
     function calculateScore(channel) {
-        // Factors:
-        // Age (0.15): Newer is better. Max score if < 30 days.
-        // Subscribers (0.25): Growth rate proxy.
-        // Views (0.20): Not available in current saved object, need to fetch or ignore. For now, assuming default.
-        // Consistency (0.15): Videos / Days active.
-        // Engagement (0.15): Not available.
-        // Replicability (0.10): Manual check, defaulting to 50/100.
-
-        // 1. Age Score (Max 100)
-        // If < 30 days = 100. If > 180 days = 0. Linear decay.
-        const createdDate = new Date(channel.created.split('/').reverse().join('-')); // Assuming Locale Date String might vary... actually better to parse the savedAt or standard format.
-        // Wait, script.js saves `created` as `toLocaleDateString`. This is risky for parsing.
-        // Let's try to parse it safely or fallback to savedAt for "recency of finding".
-        // IMPROVEMENT: script.js should save ISO string or timestamp. 
-        // For now, let's try to parse the string assuming MM/DD/YYYY or similar browser default.
-        // A better approach is to rely on 'savedAt' if parsing fails, but 'created' is key.
-        // Let's try flexible parsing:
         const now = new Date();
         const ageTime = Math.abs(now - new Date(channel.created));
-        const ageDays = Math.ceil(ageTime / (1000 * 60 * 60 * 24));
+        const ageDays = Math.max(1, Math.ceil(ageTime / (1000 * 60 * 60 * 24)));
 
-        let ageScore = 0;
+        // Age: newer = better
+        let ageScore = 20;
         if (ageDays <= 30) ageScore = 100;
         else if (ageDays <= 90) ageScore = 80;
         else if (ageDays <= 180) ageScore = 50;
-        else ageScore = 20;
 
-        // 2. Growth Score (Subs)
-        // Ideally Subs/Day. 
+        // Growth: subs per day
         const subs = parseInt(channel.subs) || 0;
-        const growthRate = ageDays > 0 ? subs / ageDays : 0;
+        const subsPerDay = subs / ageDays;
+        let growthScore = 20;
+        if (subsPerDay > 50) growthScore = 100;
+        else if (subsPerDay > 20) growthScore = 80;
+        else if (subsPerDay > 5) growthScore = 50;
 
-        let growthScore = 0;
-        if (growthRate > 50) growthScore = 100; // > 50 subs/day (1.5k/month)
-        else if (growthRate > 20) growthScore = 80;
-        else if (growthRate > 5) growthScore = 50;
-        else growthScore = 20;
-
-        // 3. Consistency (Videos / Age) -> Uploads per week
+        // Consistency: uploads per week
         const videos = parseInt(channel.videoCount) || 0;
-        const videosPerWeek = (videos / ageDays) * 7;
+        const uploadsPerWeek = (videos / ageDays) * 7;
+        let consistencyScore = 20;
+        if (uploadsPerWeek >= 3) consistencyScore = 100;
+        else if (uploadsPerWeek >= 1) consistencyScore = 80;
+        else if (uploadsPerWeek >= 0.5) consistencyScore = 50;
 
-        let consistencyScore = 0;
-        if (videosPerWeek >= 3) consistencyScore = 100; // ~1 video every 2 days
-        else if (videosPerWeek >= 1) consistencyScore = 80; // 1 video per week
-        else if (videosPerWeek >= 0.5) consistencyScore = 50;
-        else consistencyScore = 20;
+        // Views per video (log scale)
+        const views = parseInt(channel.viewCount) || 0;
+        const avgViews = videos > 0 ? views / videos : 0;
+        let viewsScore = 20;
+        if (avgViews >= 50000) viewsScore = 100;
+        else if (avgViews >= 10000) viewsScore = 80;
+        else if (avgViews >= 2000) viewsScore = 50;
 
-        // Formula weights from gemini.md
-        // We are missing Views (0.20), Engagement (0.15), Replicability (0.10). Total 0.45 missing.
-        // We will redistribute weights among available metrics or assume average for missing.
-        // Let's assuming missing metrics are "Neutral" (50/100).
-
-        const wAge = 0.15;
-        const wGrowth = 0.25;
-        const wConsistency = 0.15;
-        // Remaining 0.45 assumed at 50 points
-        const basePoints = 50 * 0.45;
-
-        const totalScore = (ageScore * wAge) + (growthScore * wGrowth) + (consistencyScore * wConsistency) + basePoints;
-
-        return Math.round(totalScore);
+        const total = (ageScore * 0.20) + (growthScore * 0.30) + (consistencyScore * 0.25) + (viewsScore * 0.25);
+        return Math.round(total);
     }
 
     function formatNumber(numStr) {
